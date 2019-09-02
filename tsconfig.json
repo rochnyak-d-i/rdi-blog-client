@@ -1,0 +1,24 @@
+{
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+    "node_modules/draft-js-plugins-editor/lib/index.d.ts",
+    "src",
+    "declarations"
+  ],
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react",
+    "declaration": true,
+    "sourceMap": true,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "importHelpers": true
+  }
+}
