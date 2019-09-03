@@ -16,14 +16,16 @@ export interface IPostFormProps {
   action?: string,
   method?: string,
   onSubmit?: (submitProps: IPostProps, meta: ISubmitMeta) => void,
-  submitLabel?: string
+  submitLabel?: string,
+  disabled?: boolean
 }
 
 export function PostForm({
   action = '/',
   method = 'POST',
   onSubmit,
-  submitLabel = 'Save'
+  submitLabel = 'Save',
+  disabled = false
 }: IPostFormProps) {
   const [label, setLabel] = useState('');
   const [description, setDescription] = useState('');
@@ -96,6 +98,7 @@ export function PostForm({
           name="title"
           value={label}
           onChange={handleChangeLabel}
+          disabled={disabled}
         />
       </label>
 
@@ -106,22 +109,24 @@ export function PostForm({
           name="description"
           value={description}
           onChange={handleChangeDescription}
+          disabled={disabled}
         />
       </label>
 
       <Content
-        editMode
+        editMode={!disabled}
         className={postFormClassNames.editor}
         placeholder="Введите текст"
         content={content}
         onChange={setContent}
       />
 
-      <EditTags tags={tags} onChange={setTags} />
+      <EditTags tags={tags} onChange={setTags} disabled={disabled} />
 
       <button
         type="submit"
         className={postFormClassNames.submit}
+        disabled={disabled}
       >
         {submitLabel}
       </button>

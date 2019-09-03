@@ -12,7 +12,8 @@ const ENTER: number = 13;
 
 export interface IEditTagsProps {
   tags: ITags,
-  onChange: (tags: ITags) => void
+  onChange: (tags: ITags) => void,
+  disabled?: boolean
 }
 
 /**
@@ -92,6 +93,7 @@ export function EditTags(props: IEditTagsProps) {
             type="button"
             className={tagsClassnames.remove}
             onClick={createHandleRemoveTag(tag)}
+            disabled={props.disabled}
           >
             <CloseIcon />
           </button>
@@ -104,6 +106,7 @@ export function EditTags(props: IEditTagsProps) {
         value={newTagLabel}
         onChange={handleChangeNewTagLabel}
         onKeyDown={handleKeyDownNewTagLabel}
+        disabled={props.disabled}
       />
     </div>
   );

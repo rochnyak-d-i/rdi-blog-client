@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",
+    "cross-fetch": "^3.0.4",
     "draft-js": "^0.11.0",
     "draft-js-alignment-plugin": "^2.0.6",
     "draft-js-anchor-plugin": "^2.0.3",
