@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SearchFormContainer } from '../container/SearchForm/SearchForm';
+import { SearchFormContainer } from '@components/container/SearchForm/SearchForm';
 
 export type HeaderProps = {};
 

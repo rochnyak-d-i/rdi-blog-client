@@ -5,8 +5,8 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import { StateProvider, reducer } from './state/index';
-import { App } from './components/App/App';
+import { StateProvider, reducer } from '@state/index';
+import { App } from '@components/App/App';
 import { getInitialState } from './getInitialState';
 
 const initialState = getInitialState();

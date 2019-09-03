@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Tags, ITagsProps } from '../../common/Tags/Tags';
+import { Tags, ITagsProps } from '@components/common/Tags/Tags';
 
 type ContainerProps = RouteComponentProps & ITagsProps;
 

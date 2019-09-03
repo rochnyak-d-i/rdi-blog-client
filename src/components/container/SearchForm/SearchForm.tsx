@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { SearchForm, ISubmitHandlerProps } from '../../common/SearchForm/SearchForm';
+import { SearchForm, ISubmitHandlerProps } from '@components/common/SearchForm/SearchForm';
 import { useStoreState, useDispatch } from '@state/index';
 import { setSearchPhrase } from '@state/actions/setSearchPhrase';
 

@@ -1,5 +1,5 @@
 import { RawDraftContentState } from 'draft-js';
-import { ITags } from '../Tags/Tags';
+import { ITags } from '@components/common/Tags/Tags';
 
 export interface IPostProps {
   label: string,

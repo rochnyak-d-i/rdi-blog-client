@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { IPostProps } from '../../common/Post/Post';
+import { IPostProps } from '@components/common/Post/Post';
 import {
   PostForm, IPostFormProps, ISubmitMeta
-} from '../../common/PostForm/PostForm';
+} from '@components/common/PostForm/PostForm';
 import fetch from 'cross-fetch';
 
 export function PostFormContainer(props: IPostFormProps) {

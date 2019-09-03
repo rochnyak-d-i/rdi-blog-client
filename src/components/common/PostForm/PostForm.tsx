@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { RawDraftContentState } from 'draft-js';
-import { Content } from '../Content/Content';
-import { ITags } from '../Tags/Tags';
-import { EditTags } from '../Tags/EditTags';
-import { IPostProps } from '../Post/Post'
+import { Content } from '@components/common/Content/Content';
+import { ITags } from '@components/common/Tags/Tags';
+import { EditTags } from '@components/common/Tags/EditTags';
+import { IPostProps } from '@components/common/Post/Post'
 import { postFormClassNames } from './classnames';
 
 import './post-form.css';
