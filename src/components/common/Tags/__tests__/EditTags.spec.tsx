@@ -5,7 +5,7 @@ import { act, Simulate } from 'react-dom/test-utils';
 import { tagsClassnames } from '../classnames';
 import { EditTags, ITags } from '../EditTags';
 
-describe.only('EditTags component', () => {
+describe('EditTags component', () => {
   const tags: ITags = [
     {
       key: 'some-1',

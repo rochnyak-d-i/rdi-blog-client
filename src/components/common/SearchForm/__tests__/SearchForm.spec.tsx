@@ -22,7 +22,7 @@ describe("SearchForm component", () => {
 
       act(() => {
         render(
-          <SearchForm path="/" initValue={testPhrase} />,
+          <SearchForm path="/" value={testPhrase} />,
           container
         );
       });
@@ -76,9 +76,11 @@ describe("SearchForm component", () => {
 
   describe('behaviour', () => {
     it('should change search input', () => {
+      const onChange = jest.fn();
+
       act(() => {
         render(
-          <SearchForm path="/" />,
+          <SearchForm path="/" onChangeValue={onChange} />,
           container
         );
       });
@@ -93,7 +95,8 @@ describe("SearchForm component", () => {
         });
       });
 
-      expect(input.value).toBe('qwe');
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange.mock.calls[0][0]).toBe('qwe');
     });
 
     it('should handle submit event', () => {
@@ -128,7 +131,7 @@ describe("SearchForm component", () => {
           <SearchForm
             method={method}
             path={path}
-            initValue={query}
+            value={query}
             name={name}
             onSubmit={mock}
           />,

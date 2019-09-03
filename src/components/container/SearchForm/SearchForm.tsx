@@ -1,15 +1,13 @@
 import React, { useMemo } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { SearchForm, ISubmitHandlerProps } from '../../common/SearchForm/SearchForm';
+import { useStoreState, useDispatch } from '../../../state/index';
+import { setSearchPhrase } from '../../../state/actions/setSearchPhrase';
 
 export const SearchFormContainer = withRouter(
   function ({location, history, ...props}: RouteComponentProps) {
-    const queryName = 'q';
-    const query = useMemo(() => {
-      const params = new URLSearchParams(location.search);
-
-      return params.get(queryName) || '';
-    }, [location.search]);
+    const { search } = useStoreState();
+    const dispatch = useDispatch();
 
     /**
      * Starts navigating to the search page
@@ -25,10 +23,11 @@ export const SearchFormContainer = withRouter(
 
     return (
       <SearchForm
-        initValue={query}
+        value={search.phrase}
         path="/search"
-        name={queryName}
+        name={search.paramName}
         onSubmit={goSearch}
+        onChangeValue={newValue=> dispatch(setSearchPhrase(newValue))}
         {...props}
       />
     );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
 import { searchFormClassNames } from './classnames';
@@ -19,7 +19,8 @@ export interface ISearchFormProps {
 
   inputClassName?: string,
   placeholder: string,
-  initValue: string,
+  value: string,
+  onChangeValue?: (query: string) => void
   name: string,
 
   buttonClassName?: string,
@@ -28,7 +29,7 @@ export interface ISearchFormProps {
 
 const defaultProps = {
   placeholder: 'Search phrase',
-  initValue: '',
+  value: '',
 
   name: 'q',
   method: 'GET',
@@ -40,8 +41,6 @@ const defaultProps = {
  * Component for search
  */
 export function SearchForm(props: ISearchFormProps) {
-  const [value, setValue] = useState(props.initValue);
-
   /**
    * Event handler to the submit form
    *
@@ -57,14 +56,12 @@ export function SearchForm(props: ISearchFormProps) {
 
     event.preventDefault();
 
-    const submitProps: ISubmitHandlerProps = {
-      query: value,
+    props.onSubmit({
+      query: props.value,
       path: props.path,
       method: props.method,
       name: props.name
-    };
-
-    props.onSubmit(submitProps);
+    });
   }
 
   /**
@@ -76,7 +73,11 @@ export function SearchForm(props: ISearchFormProps) {
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement>
   ) {
-    setValue(event.target.value);
+    if (!props.onChangeValue) {
+      return;
+    }
+
+    props.onChangeValue(event.target.value);
   }
 
   return (
@@ -98,7 +99,7 @@ export function SearchForm(props: ISearchFormProps) {
         name={props.name}
         placeholder={props.placeholder}
         aria-label={props.label}
-        value={value}
+        value={props.value}
         onChange={handleChange}
       />
 
