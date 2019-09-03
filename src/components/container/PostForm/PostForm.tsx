@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IPostProps } from '../../common/Post/Post';
 import {
   PostForm, IPostFormProps, ISubmitMeta
@@ -6,7 +6,11 @@ import {
 import fetch from 'cross-fetch';
 
 export function PostFormContainer(props: IPostFormProps) {
+  const [loading, setLoading] = useState(false);
+
   function savePost(post: IPostProps, meta: ISubmitMeta): void {
+    setLoading(true);
+
     fetch(meta.action, {
       method: meta.method,
       headers: {
@@ -14,10 +18,11 @@ export function PostFormContainer(props: IPostFormProps) {
       },
       body: JSON.stringify(post)
     })
-    .catch(console.error);
+    .catch(console.error)
+    .then(() => setLoading(false));
   }
 
   return (
-    <PostForm {...props} onSubmit={savePost} />
+    <PostForm {...props} onSubmit={savePost} disabled={loading} />
   );
 }
