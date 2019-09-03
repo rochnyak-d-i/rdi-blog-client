@@ -1,10 +1,24 @@
-const { join } = require('path');
+const { join, resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const tsConfig = require('./tsconfig.json');
 
 const env = process.env.NODE_ENV || 'development';
+
+function resolveTSPaths() {
+  const {baseUrl, paths} = tsConfig.compilerOptions;
+
+  return Object.keys(paths).reduce((aliases, key) => {
+    const aliasName = key.replace(/\/\*/g, '');
+    const aliasValue = paths[key][0].replace(/\/\*/g, '');
+
+    aliases[aliasName] = resolve(baseUrl, aliasValue);
+
+    return aliases;
+  }, {});
+}
 
 module.exports = {
   mode: ['development', 'production'].includes(env) ? env : 'development',
@@ -20,7 +34,8 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    alias: resolveTSPaths()
   },
 
   module: {

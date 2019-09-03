@@ -7,18 +7,9 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { StateProvider, reducer } from './state/index';
 import { App } from './components/App/App';
+import { getInitialState } from './getInitialState';
 
-const initialState = {
-  auth: {
-    isAuth: false,
-    token: '',
-  },
-
-  search: {
-    paramName: 'q',
-    phrase: ''
-  }
-};
+const initialState = getInitialState();
 
 const rootElement = (
   <StateProvider reducer={reducer} initialState={initialState}>

@@ -3,7 +3,8 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act, Simulate } from 'react-dom/test-utils';
 
 import { tagsClassnames } from '../classnames';
-import { EditTags, ITags } from '../EditTags';
+import { ITags } from '../Tags';
+import { EditTags } from '../EditTags';
 
 describe('EditTags component', () => {
   const tags: ITags = [

@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { SearchForm, ISubmitHandlerProps } from '../../common/SearchForm/SearchForm';
-import { useStoreState, useDispatch } from '../../../state/index';
-import { setSearchPhrase } from '../../../state/actions/setSearchPhrase';
+import { useStoreState, useDispatch } from '@state/index';
+import { setSearchPhrase } from '@state/actions/setSearchPhrase';
 
 export const SearchFormContainer = withRouter(
   function ({location, history, ...props}: RouteComponentProps) {
@@ -32,4 +32,4 @@ export const SearchFormContainer = withRouter(
       />
     );
   }
-)
+);

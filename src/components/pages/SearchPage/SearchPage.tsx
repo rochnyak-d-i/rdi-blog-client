@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useStoreState } from '@state/index';
 
 export interface SearchPageProps {};
 
 export default function SearchPage(props: SearchPageProps) {
-  // const query = useMemo(() => {
-  //   const params = new URLSearchParams(location.search);
+  // const { search } = useStoreState();
 
-  //   return params.get(queryName) || '';
-  // }, [location.search]);
+  // useEffect(() => {
+  //   // fetch
+  // }, [search, location]);
 
   return (
     <div>

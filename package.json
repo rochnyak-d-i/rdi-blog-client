@@ -70,8 +70,19 @@
     ]
   },
   "jest": {
-    "moduleFileExtensions": ["js", "json", "jsx", "ts", "tsx", "node"],
-    "moduleDirectories": ["node_modules", "bower_components", "shared"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "ts",
+      "tsx",
+      "node"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
     "transform": {
       "^.+\\.[tj]sx?$": "babel-jest",
       "^.+\\.svg$": "jest-svg-transformer"
