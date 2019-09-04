@@ -3,26 +3,20 @@ import { IPostProps } from '@components/common/Post/Post';
 import {
   PostForm, IPostFormProps, ISubmitMeta
 } from '@components/common/PostForm/PostForm';
-import fetch from 'cross-fetch';
+import { savePost } from '@services/savePost';
 
 export function PostFormContainer(props: IPostFormProps) {
   const [loading, setLoading] = useState(false);
 
-  function savePost(post: IPostProps, meta: ISubmitMeta): void {
+  function handleSubmit(post: IPostProps, meta: ISubmitMeta): void {
     setLoading(true);
 
-    fetch(meta.action, {
-      method: meta.method,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(post)
-    })
-    .catch(console.error)
-    .then(() => setLoading(false));
+    savePost(meta.action, meta.method, post)
+      .catch(console.error)
+      .then(() => setLoading(false));
   }
 
   return (
-    <PostForm {...props} onSubmit={savePost} disabled={loading} />
+    <PostForm {...props} onSubmit={handleSubmit} disabled={loading} />
   );
 }
