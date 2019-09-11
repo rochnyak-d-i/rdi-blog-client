@@ -1,84 +1,75 @@
-import React, { Suspense, Fragment } from 'react';
-import { Route, Switch } from "react-router-dom";
+import React, { PureComponent, ErrorInfo } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { AppBody } from './Body';
+import { AppError } from './Error';
 
-const HomePage = React.lazy(
-  () => import(
-    /* webpackChunkName: "home-page" */
-    '../pages/HomePage/HomePage'
-  )
-);
-const CreatePostPage = React.lazy(
-  () => import(
-    /* webpackChunkName: "create-post-page" */
-    '../pages/CreatePostPage/CreatePostPage'
-  )
-);
-const PostPage = React.lazy(
-  () => import(
-    /* webpackChunkName: "post-page" */
-    '../pages/PostPage/PostPage'
-  )
-);
-const EditPostPage = React.lazy(
-  () => import(
-    /* webpackChunkName: "edit-post-page" */
-    '../pages/EditPostPage/EditPostPage'
-  )
-);
-const SearchPage = React.lazy(
-  () => import(
-    /* webpackChunkName: "search-page" */
-    '../pages/SearchPage/SearchPage'
-  )
-);
+import { useStoreState, DispatchContext } from '@state/index';
+import { setApplicationError } from '@state/actions/setApplicationError';
+import { clearApplicationError } from '@state/actions/clearApplicationError';
 
-export interface AppProps {}
+export interface AppProps extends RouteComponentProps {}
 
-export function App(props: AppProps) {
+/**
+ * Boundary component for application
+ */
+class AppBoundary extends PureComponent<AppProps> {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    const dispatch = this.context;
+
+    dispatch(setApplicationError(error));
+  }
+
+  componentDidUpdate(prevProps: AppProps) {
+    if (this.props.location !== prevProps.location) {
+      const dispatch = this.context;
+
+      dispatch(clearApplicationError());
+
+      this._resetScroll();
+    }
+  }
+
+  /**
+   * Reset scroll page
+   */
+  private _resetScroll(): void {
+    const node = document.body;
+
+    if ('scrollTo' in node) {
+      node.scrollTo(0, 0)
+    }
+    else {
+      (node as HTMLBodyElement).scrollTop = 0;
+    }
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+AppBoundary.contextType = DispatchContext;
+
+/**
+ * Application component
+ */
+export const App = withRouter(function(props: AppProps) {
+  const state = useStoreState();
+
   return (
-    <Fragment>
+    <AppBoundary {...props}>
       <Header />
 
       <main>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              component={HomePage}
-            />
-
-            <Route
-              path="/search"
-              exact
-              component={SearchPage}
-            />
-
-            <Route
-              path="/post/create"
-              exact
-              component={CreatePostPage}
-            />
-
-            <Route
-              path="/post/:id"
-              exact
-              component={PostPage}
-            />
-
-            <Route
-              path="/post/:id/edit"
-              exact
-              component={EditPostPage}
-            />
-          </Switch>
-        </Suspense>
+        {state.error
+          ? <AppError error={state.error} />
+          : <AppBody />
+        }
       </main>
 
       <Footer />
-    </Fragment>
+    </AppBoundary>
   );
-}
+});

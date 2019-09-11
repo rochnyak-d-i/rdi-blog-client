@@ -1,12 +1,13 @@
 import React, {
-  useReducer, useContext, createContext,
-  Dispatch, ReactNode
+  useReducer, useContext, useMemo,
+  createContext, ReactNode
 } from 'react';
 import { IStateType } from './state';
 import { RootAction } from './actions/actions';
+import { ThunkType, thunk } from './thunk'
 
 // kludge for context types
-export const DispatchContext = createContext({} as Dispatch<RootAction>);
+export const DispatchContext = createContext({} as ThunkType);
 export const StoreStateContext = createContext({} as IStateType);
 
 export interface IStateProvider {
@@ -16,9 +17,10 @@ export interface IStateProvider {
 };
 export function StateProvider(props: IStateProvider) {
   const [state, dispatch] = useReducer(props.reducer, props.initialState);
+  const enhancedDispatch = useMemo(() => thunk(dispatch), [dispatch]);
 
   return (
-    <DispatchContext.Provider value={dispatch}>
+    <DispatchContext.Provider value={enhancedDispatch}>
       <StoreStateContext.Provider value={state}>
         {props.children}
       </StoreStateContext.Provider>

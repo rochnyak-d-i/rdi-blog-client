@@ -23,7 +23,7 @@ export class HttpError<R> extends Error {
    *
    * @see HttpResponse.prototype.getBody
    */
-  public async getBody() {
+  public getBody() {
     return this.response.getBody();
   }
 
@@ -32,7 +32,7 @@ export class HttpError<R> extends Error {
    *
    * @returns {string}
    */
-  public toString(): string {
+  public toStringWithStack(): string {
     const stack = typeof this.stack === 'string'
       ? this.stack.substr(this.stack.indexOf('\n'))
       : '';
@@ -74,5 +74,19 @@ export class HttpError<R> extends Error {
    */
   public isNotFound(): boolean {
     return this.status === 404;
+  }
+
+  /**
+   * @see HttpResponse.isServerError
+   */
+  public isServerError() {
+    return this.response.isServerError();
+  }
+
+  /**
+   * @see HttpResponse.isClientError
+   */
+  public isClientError() {
+    return this.response.isClientError();
   }
 }

@@ -12,6 +12,8 @@ export function getInitialState(): IStateType {
     search: {
       paramName: 'q',
       phrase: params.get('q') || ''
-    }
+    },
+
+    error: null
   };
 }
