@@ -27,20 +27,16 @@ export class HttpResponse<R = null> {
   /**
    * Return response body if exists
    *
-   * @returns {*|null}
+   * @returns {Promise<*>}
    */
-  public async getBody(): Promise<R | null> {
+  public async getBody(): Promise<R> {
     const contentType = this.response.headers.get('Content-Type');
 
-    if (!contentType) {
-      return null;
+    if (!contentType || contentType.indexOf('application/json') === -1) {
+      throw new Error(`Unexpected Content-Type: ${contentType}`);
     }
 
-    if (contentType.indexOf('application/json') !== -1) {
-      return this.response.json();
-    }
-
-    return null;
+    return this.response.json();
   }
 
   /**

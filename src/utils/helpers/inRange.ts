@@ -38,7 +38,7 @@ export function inRange(
 ) {
   return (
     isNumber(value) &&
-    (fromInclude ? value <= from : value < from) &&
-    (toInclude ? value >= to : value > to)
+    (fromInclude ? value >= from : value > from) &&
+    (toInclude ? value <= to : value < to)
   );
 }
