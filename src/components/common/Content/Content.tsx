@@ -1,3 +1,5 @@
+import './content.css';
+
 import React, { useState } from 'react';
 import {
   EditorState, convertToRaw, convertFromRaw, RawDraftContentState
@@ -7,8 +9,6 @@ import {
   plugins, AlignmentTool, InlineToolbar,
   AddVideoButton, AddImageButton
 } from './plugins/plugins';
-
-import './content.css';
 
 export interface IContentProps {
   content?: RawDraftContentState | null,

@@ -1,7 +1,7 @@
+import './assets/tags.css';
+
 import React from 'react';
 import { tagsClassnames } from './classes';
-
-import './assets/tags.css';
 
 export interface ITag {
   key: string,

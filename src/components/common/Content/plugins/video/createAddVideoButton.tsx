@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-
 import './add-video-button.css';
+
+import React, { useState, useEffect } from "react";
 
 export function createAddVideoButton(videoPlugin) {
   return function AddVideoButton(props) {

@@ -1,3 +1,5 @@
+import './post-form.css';
+
 import React, { useState } from 'react';
 import { RawDraftContentState } from 'draft-js';
 import { Content } from '@components/common/Content/Content';
@@ -5,8 +7,6 @@ import { ITags } from '@components/common/Tags/Tags';
 import { EditTags } from '@components/common/Tags/EditTags';
 import { IPostProps } from '@components/common/Post/Post'
 import { postFormClassNames } from './classes';
-
-import './post-form.css';
 
 export interface ISubmitMeta {
   action: string,

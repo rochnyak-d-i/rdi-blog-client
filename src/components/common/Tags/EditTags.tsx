@@ -1,9 +1,10 @@
+import './assets/tags.css';
+
 import React, { useState } from 'react';
 import { ITag, ITags } from './Tags';
 import { tagsClassnames } from './classes';
 
 import CloseIcon from './assets/close.svg';
-import './assets/tags.css';
 
 /**
  * @type  {number}  enter key code
