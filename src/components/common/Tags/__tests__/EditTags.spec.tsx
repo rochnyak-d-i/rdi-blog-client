@@ -2,7 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act, Simulate } from 'react-dom/test-utils';
 
-import { tagsClassnames } from '../classnames';
+import { tagsClassnames } from '../classes';
 import { ITags } from '../Tags';
 import { EditTags } from '../EditTags';
 

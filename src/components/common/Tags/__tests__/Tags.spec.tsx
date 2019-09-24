@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils'
 
 import { Tags, ITags } from '../Tags';
-import { tagsClassnames } from '../classnames';
+import { tagsClassnames } from '../classes';
 
 describe('Tags component', () => {
   const tags: ITags = [

@@ -4,7 +4,7 @@ import { Content } from '@components/common/Content/Content';
 import { ITags } from '@components/common/Tags/Tags';
 import { EditTags } from '@components/common/Tags/EditTags';
 import { IPostProps } from '@components/common/Post/Post'
-import { postFormClassNames } from './classnames';
+import { postFormClassNames } from './classes';
 
 import './post-form.css';
 

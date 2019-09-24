@@ -1,5 +1,5 @@
 import React from 'react';
-import { tagsClassnames } from './classnames';
+import { tagsClassnames } from './classes';
 
 import './assets/tags.css';
 

@@ -1,7 +1,3 @@
-export interface IPostFormClassNames {
-  [keyForClass: string]: string
-}
-
 export const postFormClassNames = {
   root: 'post-form',
   label: 'post-form__label',

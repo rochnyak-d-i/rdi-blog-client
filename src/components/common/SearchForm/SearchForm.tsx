@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { searchFormClassNames } from './classnames';
+import { searchFormClassNames } from './classes';
 import IconLoupe from './assets/icon-loupe.svg';
 import './assets/search-form.css';
 
