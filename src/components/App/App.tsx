@@ -1,4 +1,4 @@
-import React, { PureComponent, ErrorInfo } from 'react';
+import React, { useEffect, PureComponent, ErrorInfo } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { Header } from './Header';
@@ -27,22 +27,6 @@ class AppBoundary extends PureComponent<AppProps> {
       const dispatch = this.context;
 
       dispatch(clearApplicationError());
-
-      this._resetScroll();
-    }
-  }
-
-  /**
-   * Reset scroll page
-   */
-  private _resetScroll(): void {
-    const node = document.body;
-
-    if ('scrollTo' in node) {
-      node.scrollTo(0, 0)
-    }
-    else {
-      (node as HTMLBodyElement).scrollTop = 0;
     }
   }
 
@@ -53,16 +37,32 @@ class AppBoundary extends PureComponent<AppProps> {
 AppBoundary.contextType = DispatchContext;
 
 /**
+ * Reset scroll page
+ */
+function resetScrollPage() {
+  const node = document.documentElement;
+
+  if ('scrollTo' in node) {
+    node.scrollTo(0, 0)
+  }
+  else {
+    (node as HTMLBodyElement).scrollTop = 0;
+  }
+}
+
+/**
  * Application component
  */
 export const App = withRouter(function(props: AppProps) {
   const state = useStoreState();
 
+  useEffect(resetScrollPage, [props.location]);
+
   return (
     <AppBoundary {...props}>
       <Header />
 
-      <main>
+      <main style={{height: '300px'}}>
         {state.error
           ? <AppError error={state.error} />
           : <AppBody />
