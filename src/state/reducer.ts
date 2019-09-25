@@ -1,5 +1,5 @@
 import { RootAction, ActionType } from './actions/actions';
-import { IStateAuth, IStateSearch, IStateError, IStateType } from './state';
+import { IStateAuth, IStateSearch, IStateError, IStateNotifications, IStateType } from './state';
 
 function authReducer(state: IStateAuth, action: RootAction): IStateAuth {
   return state;
@@ -22,6 +22,17 @@ function errorReducer(state: IStateError, action: RootAction): IStateError {
 
   return state;
 }
+function notificationsReducer(state: IStateNotifications, action: RootAction) {
+  switch (action.type) {
+    case ActionType.ADD_NOTIFICATION:
+      return state.concat(action.payload.notification);
+    case ActionType.REMOVE_NOTIFICATION:
+      return state.filter(notification =>
+        notification.id !== action.payload.id);
+  }
+
+  return state;
+}
 
 /**
  * Implementation of the reducer in Redux style
@@ -34,6 +45,7 @@ export function reducer(state: IStateType, action: RootAction): IStateType {
   return {
     auth: authReducer(state.auth, action),
     search: searchReducer(state.search, action),
-    error: errorReducer(state.error, action)
+    error: errorReducer(state.error, action),
+    notifications: notificationsReducer(state.notifications, action)
   };
 }

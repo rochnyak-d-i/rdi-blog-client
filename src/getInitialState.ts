@@ -14,6 +14,8 @@ export function getInitialState(): IStateType {
       phrase: params.get('q') || ''
     },
 
-    error: null
+    error: null,
+
+    notifications: []
   };
 }

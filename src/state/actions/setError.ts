@@ -1,6 +1,7 @@
 import { HttpError } from '@utils/HttpError';
 import { IActionFn } from '../thunk';
 import { setApplicationError } from './setApplicationError';
+import { addNotification } from './addNotification';
 
 export function setError(error: Error, {isAppError = false} = {}): IActionFn {
   console.error(error);
@@ -13,7 +14,10 @@ export function setError(error: Error, {isAppError = false} = {}): IActionFn {
       dispatch(setApplicationError(error));
     }
     else {
-      // show message
+      dispatch(addNotification({
+        type: 'ERROR',
+        message: error.message
+      }));
     }
   };
 }

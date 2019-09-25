@@ -5,6 +5,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { AppBody } from './Body';
 import { AppError } from './Error';
+import { NotificationsContainer } from '@components/container/Notifications/Notifications';
 
 import { useStoreState, DispatchContext } from '@state/index';
 import { setApplicationError } from '@state/actions/setApplicationError';
@@ -61,6 +62,7 @@ export const App = withRouter(function(props: AppProps) {
   return (
     <AppBoundary {...props}>
       <Header />
+      <NotificationsContainer />
 
       <main style={{height: '300px'}}>
         {state.error

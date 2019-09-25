@@ -1,3 +1,4 @@
+import { INotifications } from '@components/common/Notifications/Notifications';
 import { HttpError } from '@utils/HttpError';
 
 export interface IStateAuth {
@@ -12,8 +13,11 @@ export interface IStateSearch {
 
 export type IStateError = null | Error | HttpError<any>;
 
+export type IStateNotifications = INotifications;
+
 export interface IStateType {
   auth: IStateAuth,
   search: IStateSearch,
-  error: IStateError
+  error: IStateError,
+  notifications: IStateNotifications
 }
