@@ -54,6 +54,7 @@
     "normalize.css": "^8.0.1",
     "react-svg-loader": "^3.0.3",
     "source-map-loader": "^0.2.4",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.5.3",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
@@ -70,24 +71,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "jsx",
-      "ts",
-      "tsx",
-      "node"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "bower_components",
-      "shared"
-    ],
-    "transform": {
-      "^.+\\.[tj]sx?$": "babel-jest",
-      "^.+\\.svg$": "jest-svg-transformer"
-    }
   }
 }
