@@ -2,23 +2,24 @@ import './assets/notifications.css';
 
 import React from 'react';
 
-import { Notification, INotification, ICloseHandler } from './Notification';
+import { Notification, INotification, INotificationExtendProps } from './Notification';
 import classes from './classes';
 
 export type INotifications = Array<INotification>;
-export interface INotificationsProps {
-  notifications: INotifications,
-  onClose: ICloseHandler
+export interface INotificationsProps extends INotificationExtendProps {
+  notifications: INotifications
 }
 
-export function Notifications({ notifications, onClose }: INotificationsProps) {
+export function Notifications(
+  { notifications, ...props }: INotificationsProps
+) {
   return (
     <div className={classes.root}>
       {notifications.map(notification => (
         <Notification
           key={notification.id}
           {...notification}
-          onClose={onClose}
+          {...props}
         />
       ))}
     </div>

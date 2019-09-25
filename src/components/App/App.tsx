@@ -64,7 +64,7 @@ export const App = withRouter(function(props: AppProps) {
       <Header />
       <NotificationsContainer />
 
-      <main style={{height: '300px'}}>
+      <main>
         {state.error
           ? <AppError error={state.error} />
           : <AppBody />

@@ -1,6 +1,6 @@
 import './assets/notification.css';
 
-import React, { useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import classNames from 'classnames';
 import { noop } from '@utils/helpers/noop';
 
@@ -16,11 +16,14 @@ export interface INotification {
   message: string,
   type?: INotificationTypes
 }
-export type ICloseHandler = (id: number) => void;
-export type INotificationProps = INotification & {
-  onClose?: ICloseHandler,
-  buttonLabel?: string
+export interface INotificationExtendProps {
+  onClose?: (id: number) => void,
+  buttonLabel?: string,
+  timeout?: number
 }
+export type INotificationProps = INotification & INotificationExtendProps;
+
+type ITimeout = ReturnType<typeof setTimeout>;
 
 /**
  * Props for notification by type
@@ -62,7 +65,8 @@ export function Notification({
   message,
   type = 'INFO',
   onClose = noop,
-  buttonLabel = 'Close'
+  buttonLabel = 'Close',
+  timeout = 5 * 1000
 }: INotificationProps) {
   const {className, role, ariaLive, IconComponent} = propsByType[type];
   /**
@@ -71,6 +75,14 @@ export function Notification({
    * @returns void
    */
   const handleClose = useCallback(() => onClose(id), [id, onClose]);
+  const timeoutRef = useRef<ITimeout>();
+
+  useEffect(() => {
+    clearTimeout(timeoutRef.current as ITimeout);
+    timeoutRef.current = setTimeout(handleClose, timeout);
+
+    return () => clearTimeout(timeoutRef.current as ITimeout);
+  }, [handleClose]);
 
   return (
     <div

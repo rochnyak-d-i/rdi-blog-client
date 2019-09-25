@@ -32,6 +32,8 @@ const testData: Array<{
   }
 ];
 
+jest.useFakeTimers();
+
 describe('Notification component', () => {
   let container: HTMLDivElement;
 
@@ -90,5 +92,29 @@ describe('Notification component', () => {
     });
 
     expect(handleClose).toHaveBeenCalledWith(id);
+  });
+
+  it('should call handler close after timed out', () => {
+    const handleClose = jest.fn();
+    const timeout = 10 * 1000;
+
+    act(() => {
+      render(
+        <Notification
+          id={1}
+          message="I closed"
+          timeout={timeout}
+          onClose={handleClose}
+        />,
+        container
+      );
+    });
+
+    expect(handleClose).not.toBeCalled();
+
+    jest.advanceTimersByTime(timeout);
+
+    expect(handleClose).toBeCalled();
+    expect(handleClose).toBeCalledTimes(1);
   });
 });
